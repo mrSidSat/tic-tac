@@ -64,9 +64,10 @@
             .sel>p{
                text-align: center;
                 font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; 
-                font-size: x-large;
-             
-               
+                font-size: x-large; 
+            }
+            .sel>span{
+                display: none;
             }
             .alpha{
                 display:flex;
@@ -81,9 +82,7 @@
                 text-align: center;
                 line-height: 3em;
                 height: 80px;
-                cursor: pointer;
-                
-                
+                cursor: pointer;   
             }
            
             
@@ -99,6 +98,7 @@
             <div class="buts" value="X" onclick="Usersym(1)">X</div>
             <div class="buts" value="O" onclick="Usersym(0)">O</div>
             </div>
+            <span>please select a symbol first</span>
             </div>
         </div>
     <div class="playarea">
@@ -126,7 +126,7 @@
 
     </div>
     <script>
-        var usersymbol = undefined;
+        var usersymbol;
         var usersym = document.getElementsByClassName("buts");
         function Usersym(sym){
             if(usersymbol == undefined){
@@ -139,20 +139,38 @@
            }
         }
             
-           console.log(usersymbol)
+           console.log(usersymbol);
         }
+        
         var grid = document.getElementsByTagName("td");
-        console.log(grid);
-        grid[0].onclick = ()=>{
-            console.log("hello world");
-        }
-        Array.prototype.forEach.call(grid,(k)=>{
-           k.onclick(console.log(k));
-            });
+        var r = [grid[0],grid[1],grid[2]];
+        var d = [grid[2],grid[15],grid[8]];
+        var l = [grid[6],grid[7],grid[8]];
+        var u = [grid[0],grid[3],grid[6]];
+        var d1 = [grid[0],grid[4],grid[8]];
+        var d2 = [grid[2],grid[4],grid[6]];
+       for(let i = 0;i<grid.length;i++)
+       {
+           grid[i].addEventListener("click",()=>{
+            var sel = document.getElementsByClassName("sel")[0];
+               if(usersymbol !=undefined)
+               {
+                sel.children[2].style.display = "none";
+               grid[i].innerText=usersymbol;
+               comptoplay();
+               }
+               else{  
+                   sel.children[2].style.display = "block";
+               }
+           });
            
+       }
+       function comptoplay(){
+           console.log(r);
+       }
         
         
-        
+       
        
        
     </script>
