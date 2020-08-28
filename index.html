@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TIC-TAC-TOE</title>
+        <style>
+            html,body{
+                height:100%;
+                width:100%;
+                margin:0px;
+                padding:0px;
+                
+
+            }
+            .playarea{
+                border:1px double black;
+                border-radius: 10px;
+                background-color: #ffffff;
+                box-shadow: 15px 15px 20px #b4b3b3;
+                position:relative;
+                top:50%;
+                transform:translateY(-50%);
+                height: 70%;
+                flex: 3;
+            }
+            table{
+                position: relative;
+                left:50%;
+                top:50%;
+                transform:translate(-50%,-50%);
+
+            }
+            td{
+                height:100px;
+                width:120px;
+                text-align: center;
+                justify-content: center ;
+            }
+            .main{
+                display: flex;
+                border: 1px solid blue;
+                height: 100%;
+                margin:0px;
+                padding:0px;
+            }
+            .butsel{
+                flex:1;
+                border: 1px solid blue;
+            }
+            .banner{
+                flex: 1;
+                border: 1px solid blue;
+            }
+            .sel{
+                position: relative;
+                top:50%;
+                transform: translateY(-50%);
+                
+                background-color: blueviolet;
+                color: cornsilk;
+                border:1px solid blue;
+                
+                
+            }
+            .sel>p{
+               text-align: center;
+                font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; 
+                font-size: x-large;
+             
+               
+            }
+            .alpha{
+                display:flex;
+
+            }
+            .alpha>div{
+                flex:1;
+                font-size: x-large;
+                font-weight: 800;
+                background-color: blueviolet;
+                color: cornsilk;
+                text-align: center;
+                line-height: 3em;
+                height: 80px;
+                cursor: pointer;
+                
+                
+            }
+           
+            
+        </style>
+    </head>
+
+<body>
+    <div class="main">
+        <div class="butsel">
+            <div class="sel">
+            <p> Your Symbol</p>
+            <div class="alpha">
+            <div class="buts" value="X" onclick="Usersym(1)">X</div>
+            <div class="buts" value="O" onclick="Usersym(0)">O</div>
+            </div>
+            </div>
+        </div>
+    <div class="playarea">
+            <table border="5">
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>   
+    </div>
+    <div class="banner">
+        <div>TIC_TAC_TOE</div>
+    </div>
+
+    </div>
+    <script>
+        var usersymbol = undefined;
+        var usersym = document.getElementsByClassName("buts");
+        function Usersym(sym){
+            if(usersymbol == undefined){
+           if(sym == 1)
+           {
+               usersymbol = 'X';
+           }
+           else{
+               usersymbol = 'O';
+           }
+        }
+            
+           console.log(usersymbol)
+        }
+        var grid = document.getElementsByTagName("td");
+        console.log(grid);
+        grid[0].onclick = ()=>{
+            console.log("hello world");
+        }
+        Array.prototype.forEach.call(grid,(k)=>{
+           k.onclick(console.log(k));
+            });
+           
+        
+        
+        
+       
+       
+    </script>
+</body>
+</html>
