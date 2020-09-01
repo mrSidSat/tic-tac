@@ -57,10 +57,9 @@
                 
                 background-color: blueviolet;
                 color: cornsilk;
-                border:1px solid blue;
-                
-                
+                border:1px solid blue;   
             }
+            
             .sel>p{
                text-align: center;
                 font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; 
@@ -77,13 +76,24 @@
                 flex:1;
                 font-size: x-large;
                 font-weight: 800;
-                background-color: blueviolet;
-                color: cornsilk;
+               
                 text-align: center;
                 line-height: 3em;
                 height: 80px;
                 cursor: pointer;   
             }
+            .butbef{
+                background-color: blueviolet;
+                color: cornsilk;
+            }
+            .butaf{
+                background-color:white;
+                color: blueviolet
+            }
+            td{
+                cursor: pointer;
+            }
+            
            
             
         </style>
@@ -95,8 +105,8 @@
             <div class="sel">
             <p> Your Symbol</p>
             <div class="alpha">
-            <div class="buts" value="X" onclick="Usersym(1)">X</div>
-            <div class="buts" value="O" onclick="Usersym(0)">O</div>
+            <div class="butbef" value="X" onclick="Usersym(1)">X</div>
+            <div class="butbef" value="O" onclick="Usersym(0)">O</div>
             </div>
             <span>please select a symbol first</span>
             </div>
@@ -127,52 +137,119 @@
     </div>
     <script>
         var usersymbol;
-        var usersym = document.getElementsByClassName("buts");
+        var usersym = document.getElementsByClassName("butbef");
+        
+       
         function Usersym(sym){
-            if(usersymbol == undefined){
+           
            if(sym == 1)
            {
+               usersym[0].classList.remove("butaf");
+               usersym[1].classList.remove("butaf");
                usersymbol = 'X';
+               useropp = 'O';
+               usersym[0].classList.toggle("butaf");
+               console.log(usersym[0].classList);
            }
            else{
+                usersym[0].classList.remove("butaf");
+                usersym[1].classList.remove("butaf");
                usersymbol = 'O';
+               useropp = 'X';
+               usersym[1].classList.toggle("butaf");
            }
-        }
+        
             
            console.log(usersymbol);
         }
         
+       
+        
         var grid = document.getElementsByTagName("td");
         var r = [grid[0],grid[1],grid[2]];
-        var d = [grid[2],grid[15],grid[8]];
+        var d = [grid[2],grid[5],grid[8]];
         var l = [grid[6],grid[7],grid[8]];
         var u = [grid[0],grid[3],grid[6]];
         var d1 = [grid[0],grid[4],grid[8]];
         var d2 = [grid[2],grid[4],grid[6]];
+        var arr = [r,d,l,u,d1,d2];
+        
        for(let i = 0;i<grid.length;i++)
        {
+           
+           
            grid[i].addEventListener("click",()=>{
             var sel = document.getElementsByClassName("sel")[0];
-               if(usersymbol !=undefined)
+               if(usersymbol !=undefined && grid[i].innerHTML == '')
                {
-                sel.children[2].style.display = "none";
+                
                grid[i].innerText=usersymbol;
+               sel.children[2].style.display = "none";
                comptoplay();
+               
+              
                }
-               else{  
+               else if(usersymbol ==undefined){  
                    sel.children[2].style.display = "block";
                }
            });
            
+           
        }
        function comptoplay(){
-           console.log(r);
+           var count = [0,0,0,0,0,0];
+           for(let i=0;i<6;i++)
+           {
+               for(let j=0;j<3;j++)
+               {
+                   if(arr[i][j].innerHTML == usersymbol)
+                   {
+                       count[i]++;
+                   }
+               }
+           }
+           console.log(count);
+           for(let i =0;i<6;i++)
+           {
+            /*if(count[i] == 3)
+               {
+                   for(let j =0;j<3;j++)
+                   {
+                       if(arr[i][j].innerHTML != usersymbol || arr[i][j].innerHTML != useropp)
+                       {
+                           arr[i][j].innerHTML = useropp;
+                           break;
+                       }
+                   }
+                   break;
+               }*/
+            if(count[i] == 2)
+               {
+                   for(let j =0;j<3;j++)
+                   {
+                       if(arr[i][j].innerHTML != usersymbol || arr[i][j].innerHTML != useropp)
+                       {
+                           arr[i][j].innerHTML = useropp;
+                           break;
+                       }
+                   }
+                   break;
+               }
+              
+               else if(count[i] == 1)
+               {
+                   for(let j =0;j<3;j++)
+                   {
+                       if(arr[i][j].innerHTML != usersymbol && arr[i][j].innerHTML != useropp)
+                       {
+                           arr[i][j].innerHTML = useropp;
+                           break;
+                       }
+                   }
+                   break;
+               }
+           }
        }
-        
-        
-       
-       
-       
     </script>
 </body>
 </html>
