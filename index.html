@@ -109,7 +109,7 @@
             <div class="butbef" value="O" onclick="Usersym(0)">O</div>
             </div>
             <span>please select a symbol first</span>
-            <span>you won.</span>
+            
             </div>
         </div>
     <div class="playarea">
@@ -133,13 +133,15 @@
     </div>
     <div class="banner">
         <div>TIC_TAC_TOE</div>
+        <div id="result" style="display: none;">You Won</div>
+        <div id="tie" style="display: none;">Tie</div>
     </div>
 
     </div>
     <script>
         var usersymbol;
         var usersym = document.getElementsByClassName("butbef");
-        var count = [0,0,0,0,0,0];
+        var count = [0,0,0,0,0,0,0,0];
         
        
         function Usersym(sym){
@@ -174,7 +176,9 @@
         var u = [grid[0],grid[3],grid[6]];
         var d1 = [grid[0],grid[4],grid[8]];
         var d2 = [grid[2],grid[4],grid[6]];
-        var arr = [r,d,l,u,d1,d2];
+        var vm = [grid[1],grid[4],grid[7]];
+        var hm = [grid[3],grid[4],grid[5]];
+        var arr = [r,d,l,u,d1,d2,vm,hm];
 
         console.log(grid[1]);
         for(let i = 0 ;i<6;i++)
@@ -193,8 +197,9 @@
                 
                grid[i].innerText=usersymbol;
                sel.children[2].style.display = "none";
+               //checktie();
                comptoplay();
-               findmaxocc()
+               findmaxocc();
                
               
                }
@@ -206,8 +211,8 @@
            
        }
        function comptoplay(){
-          count = [0,0,0,0,0,0]
-           for(let i=0;i<6;i++)
+          count = [0,0,0,0,0,0,0,0]
+           for(let i=0;i<8;i++)
            {
                for(let j=0;j<3;j++)
                {
@@ -221,33 +226,59 @@
            
        }
         function findmaxocc(){
-            if(count.includes(3) == 1){
+           console.log("findmax reached");
+            let op = 0;
+            if(count.includes(3) == 1 && op == 0){
                 var index = count.indexOf(3);
-                handel3(index);
+                document.getElementById("result").style.display = "block";
+                //handel3(index);
+                cleargrid();
                 console.log(3);
+                op++;
             }
-            else if(count.includes(2) == 1){
+            else if(count.includes(2) == 1 && op == 0){
+                // let check1 = checkcounters();
+                // console.log(check1);
                 var index = count.indexOf(2);
                 handel2(index);
                 console.log(2);
+                op++;
             }
-            else if(count.includes(1) == 1){
+            else if(count.includes(1) == 1 && op == 0){
                 var index = count.indexOf(1);
                 handel1(index);
                 console.log(1);
+                op++;
             }
        }
-       function handel3(e){
-        sel.children[3].style.display = "block";
-       }
+    //    function handel3(e){
+    //     sel.children[3].style.display = "block";
+    //    }
        function handel2(e){
+           let mrsid = 0;
+           console.log("handel2 reached")
         for(let j=0;j<3;j++){
                 if(arr[e][j].innerHTML == "")
                 {
                     arr[e][j].innerHTML = useropp;
+                    console.log("a2");
                     break;
+                    mrsid = 0;
                 }
-                else continue;
+                else if(mrsid == 2) {
+                    count[e] = 9;
+                    let temp2 = count.indexOf(2);
+                    if(temp2 == -1)
+                    {
+
+                        findmaxocc();
+                    }
+                    handel2(temp2);
+
+                }
+                else{
+                    mrsid++;
+                }
             }
             
        }
@@ -256,57 +287,61 @@
                 if(arr[e][j].innerHTML == "")
                 {
                     arr[e][j].innerHTML = useropp;
+                    console.log("a1");
                     break;
                 }
                 else continue;
             }
             
        }
-    //    function handel1(e){
-    //         var inl = arr[e].indexOf(<td></td>);
-    //         console.log(inl);
-    //         arr[e][inl].innerHTML = useropp;
+    //    function checkcounters(){
+    //        console.log(12);
+    //        let temp = count.indexOf(2);
+    //        console.log(temp);
+    //        let pop = 0;
+    //        for(let j =0;j<3;j++)
+    //        {
+    //             if(arr[temp][j] == useropp)
+    //             {
+    //                 count[i] = 0;
+    //                 console.log("zap " + count);
+    //                 checkcounters();
+    //             }
+    //             console.log(temp);
+    //             return temp;
+    //        }
+        //    if()
+        //    {
+        //        checkcounters();
+        //    }
+        //    else return temp;
+       //}
+       function cleargrid(){
+           for(let i=0;i<9;i++)
+           {
+               grid[i].innerHTML = "";
+           }
+       }
+    //    function checktie()
+    //    { 
+    //        console.log("pppl")
+    //        var conter = 0;
+    //        for(let i =0;i<9;i++)
+    //        {
+    //            if(grid[i].innerHTML == usersymbol)
+    //            {
+    //                conter++;
+    //            }
+    //        }
+    //        console.log(conter);
+    //        if(conter == 4)
+    //        {
+    //            document.getElementById("tie").style.display = "block";
+    //            cleargrid();
+    //        }
     //    }
-       
-            /*if(count[i] == 3)
-               {
-                   for(let j =0;j<3;j++)
-                   {
-                       if(arr[i][j].innerHTML != usersymbol || arr[i][j].innerHTML != useropp)
-                       {
-                           arr[i][j].innerHTML = useropp;
-                           break;
-                       }
-                   }
-                   break;
-               }*/
-            // if(count[i] == 2)
-            //    {
-            //        for(let j =0;j<3;j++)
-            //        {
-            //            if(arr[i][j].innerHTML != usersymbol || arr[i][j].innerHTML != useropp)
-            //            {
-            //                arr[i][j].innerHTML = useropp;
-            //                break;
-            //            }
-            //        }
-            //        break;
-            //    }
-              
-            //    else if(count[i] == 1)
-            //    {
-            //        for(let j =0;j<3;j++)
-            //        {
-            //            if(arr[i][j].innerHTML != usersymbol && arr[i][j].innerHTML != useropp)
-            //            {
-            //                arr[i][j].innerHTML = useropp;
-            //                break;
-            //            }
-            //        }
-            //        break;
-            //    }
-           
 
+   
        
     </script>
 </body>
