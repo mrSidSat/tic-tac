@@ -8,25 +8,30 @@
                 width:100%;
                 margin:0px;
                 padding:0px;
-                
-
+                background-image: url(./back.jpg);
+                background-size: cover;
+                background-repeat: no-repeat;
+               
             }
             .playarea{
-                border:1px double black;
+                /* border:1px double black; */
                 border-radius: 10px;
-                background-color: #ffffff;
-                box-shadow: 15px 15px 20px #b4b3b3;
+                
+                
                 position:relative;
                 top:50%;
                 transform:translateY(-50%);
                 height: 70%;
                 flex: 3;
+                background-color: transparent;
             }
             table{
                 position: relative;
                 left:50%;
                 top:50%;
                 transform:translate(-50%,-50%);
+                border:2px solid white;
+                
 
             }
             td{
@@ -34,21 +39,33 @@
                 width:120px;
                 text-align: center;
                 justify-content: center ;
+                color: white;
+                font-weight: 600;
+                background-color: #252525 ;
+                margin: 10fpx;
             }
             .main{
                 display: flex;
-                border: 1px solid blue;
+                /* border: 1px solid blue; */
                 height: 100%;
                 margin:0px;
                 padding:0px;
             }
             .butsel{
                 flex:1;
-                border: 1px solid blue;
+                /* border: 1px solid blue; */
             }
             .banner{
                 flex: 1;
-                border: 1px solid blue;
+                display: block;
+                /* border: 1px solid blue; */
+                /* justify-content: center; */
+            }
+            .banner>div{
+                
+                text-align: center;
+                /* flex:1; */
+                color:white
             }
             .sel{
                 position: relative;
@@ -57,7 +74,7 @@
                 
                 background-color: blueviolet;
                 color: cornsilk;
-                border:1px solid blue;   
+                /* border:1px solid blue;    */
             }
             
             .sel>p{
@@ -198,8 +215,9 @@
                grid[i].innerText=usersymbol;
                sel.children[2].style.display = "none";
                //checktie();
-               comptoplay();
-               findmaxocc();
+               setTimeout( function(){comptoplay();
+               findmaxocc();checktie()},1000);
+              
                
               
                }
@@ -233,6 +251,9 @@
                 document.getElementById("result").style.display = "block";
                 //handel3(index);
                 cleargrid();
+                usersymbol = undefined;
+                usersym[0].classList.remove("butaf");
+                usersym[1].classList.remove("butaf");
                 console.log(3);
                 op++;
             }
@@ -251,9 +272,6 @@
                 op++;
             }
        }
-    //    function handel3(e){
-    //     sel.children[3].style.display = "block";
-    //    }
        function handel2(e){
            let mrsid = 0;
            console.log("handel2 reached")
@@ -273,7 +291,9 @@
 
                         findmaxocc();
                     }
+                    else{
                     handel2(temp2);
+                    }
 
                 }
                 else{
@@ -283,66 +303,60 @@
             
        }
        function handel1(e){
+           let mrsid =0;
+           console.log("reached handel1")
         for(let j=0;j<3;j++){
                 if(arr[e][j].innerHTML == "")
                 {
                     arr[e][j].innerHTML = useropp;
                     console.log("a1");
+                    mrsid = 0;
                     break;
+                    
                 }
-                else continue;
-            }
-            
+                else if(mrsid == 2)
+                {
+                    count[e] = 9;
+                    let temp1 = count.indexOf(1);
+                    if(temp1 == -1)
+                    {
+                        findmaxocc();
+                    }
+                    else{
+                        handel1(temp1);
+                    }
+                }
+                else{
+                    mrsid++;
+                }
+            }  
        }
-    //    function checkcounters(){
-    //        console.log(12);
-    //        let temp = count.indexOf(2);
-    //        console.log(temp);
-    //        let pop = 0;
-    //        for(let j =0;j<3;j++)
-    //        {
-    //             if(arr[temp][j] == useropp)
-    //             {
-    //                 count[i] = 0;
-    //                 console.log("zap " + count);
-    //                 checkcounters();
-    //             }
-    //             console.log(temp);
-    //             return temp;
-    //        }
-        //    if()
-        //    {
-        //        checkcounters();
-        //    }
-        //    else return temp;
-       //}
        function cleargrid(){
            for(let i=0;i<9;i++)
            {
                grid[i].innerHTML = "";
            }
        }
-    //    function checktie()
-    //    { 
-    //        console.log("pppl")
-    //        var conter = 0;
-    //        for(let i =0;i<9;i++)
-    //        {
-    //            if(grid[i].innerHTML == usersymbol)
-    //            {
-    //                conter++;
-    //            }
-    //        }
-    //        console.log(conter);
-    //        if(conter == 4)
-    //        {
-    //            document.getElementById("tie").style.display = "block";
-    //            cleargrid();
-    //        }
-    //    }
-
-   
-       
+       function checktie(){
+           console.log("go");
+           let ctr = 0;
+           for(let i=0;i<9;i++)
+           {
+               if(grid[i].innerHTML == usersymbol)
+               {
+                   ctr++;
+               }
+           }
+           console.log(ctr);
+           if(ctr == 5)
+           {
+               document.getElementById("tie").style.display = "block";
+               cleargrid();
+               usersymbol = undefined;
+               usersym[0].classList.remove("butaf");
+               usersym[1].classList.remove("butaf");
+           }
+       }
     </script>
 </body>
 </html>
