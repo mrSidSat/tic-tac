@@ -31,6 +31,7 @@
                 top:50%;
                 transform:translate(-50%,-50%);
                 border:2px solid white;
+                border-spacing: 5px;
                 
 
             }
@@ -43,6 +44,9 @@
                 font-weight: 600;
                 background-color: #252525 ;
                 margin: 10fpx;
+                font-size: 2em;
+                box-shadow: inset 0px 0px 10px black;
+                
             }
             .main{
                 display: flex;
@@ -57,13 +61,19 @@
             }
             .banner{
                 flex: 1;
-                display: block;
+                /* display: block; */
+                display:grid;
+                align-content: center;
                 /* border: 1px solid blue; */
                 /* justify-content: center; */
             }
             .banner>div{
-                
+                /* justify-content: center; */
+                /* align-items: center; */
                 text-align: center;
+                font-size: 2em;
+                line-height: 2em;
+               
                 /* flex:1; */
                 color:white
             }
@@ -72,13 +82,18 @@
                 top:50%;
                 transform: translateY(-50%);
                 
-                background-color: blueviolet;
+                background-color: #252525;
+                box-shadow: inset 0px 0px 10px black;
                 color: cornsilk;
+                display:inline-block;
+                margin-left: 20px;
+                
                 /* border:1px solid blue;    */
             }
             
             .sel>p{
-               text-align: center;
+                padding:0px 20px;
+                text-align: center;
                 font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; 
                 font-size: x-large; 
             }
@@ -86,6 +101,7 @@
                 display: none;
             }
             .alpha{
+                margin-top:10px;
                 display:flex;
 
             }
@@ -100,12 +116,14 @@
                 cursor: pointer;   
             }
             .butbef{
-                background-color: blueviolet;
+                background-color: #252525;
+                box-shadow: inset 0px 0px 10px black;
                 color: cornsilk;
             }
             .butaf{
                 background-color:white;
-                color: blueviolet
+                box-shadow: inset 0px 0px 10px black;
+                color:  #252525;
             }
             td{
                 cursor: pointer;
@@ -149,7 +167,7 @@
             </table>   
     </div>
     <div class="banner">
-        <div>TIC_TAC_TOE</div>
+        <div>TIC TAC TOE</div>
         <div id="result" style="display: none;">You Won</div>
         <div id="tie" style="display: none;">Tie</div>
     </div>
@@ -162,7 +180,13 @@
         
        
         function Usersym(sym){
-           
+            
+           let mrsidsat = document.getElementsByClassName("banner")[0];
+           console.log(mrsidsat.children)
+           for(let i=1;i<mrsidsat.children.length;i++)
+           {
+               mrsidsat.children[i].style.display = "none";
+           }
            if(sym == 1)
            {
                usersym[0].classList.remove("butaf");
