@@ -1,0 +1,126 @@
+html,body{
+    height:100%;
+    width:100%;
+    margin:0px;
+    padding:0px;
+    background-image: url(./back.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+   
+}
+.playarea{
+    /* border:1px double black; */
+    border-radius: 10px;
+    
+    
+    position:relative;
+    top:50%;
+    transform:translateY(-50%);
+    height: 70%;
+    flex: 3;
+    background-color: transparent;
+}
+table{
+    position: relative;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    border:2px solid white;
+    border-spacing: 5px;
+    
+
+}
+td{
+    height:100px;
+    width:120px;
+    text-align: center;
+    justify-content: center ;
+    color: white;
+    font-weight: 600;
+    background-color: #252525 ;
+    margin: 10fpx;
+    font-size: 2em;
+    box-shadow: inset 0px 0px 10px black;
+    
+}
+.main{
+    display: flex;
+    /* border: 1px solid blue; */
+    height: 100%;
+    margin:0px;
+    padding:0px;
+}
+.butsel{
+    flex:1;
+    /* border: 1px solid blue; */
+}
+.banner{
+    flex: 1;
+    /* display: block; */
+    display:grid;
+    align-content: center;
+    /* border: 1px solid blue; */
+    /* justify-content: center; */
+}
+.banner>div{
+    /* justify-content: center; */
+    /* align-items: center; */
+    text-align: center;
+    font-size: 2em;
+    line-height: 2em;
+   
+    /* flex:1; */
+    color:white
+}
+.sel{
+    position: relative;
+    top:50%;
+    transform: translateY(-50%);
+    
+    background-color: #252525;
+    box-shadow: inset 0px 0px 10px black;
+    color: cornsilk;
+    display:inline-block;
+    margin-left: 20px;
+    
+    /* border:1px solid blue;    */
+}
+
+.sel>p{
+    padding:0px 20px;
+    text-align: center;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; 
+    font-size: x-large; 
+}
+.sel>span{
+    display: none;
+}
+.alpha{
+    margin-top:10px;
+    display:flex;
+
+}
+.alpha>div{
+    flex:1;
+    font-size: x-large;
+    font-weight: 800;
+   
+    text-align: center;
+    line-height: 3em;
+    height: 80px;
+    cursor: pointer;   
+}
+.butbef{
+    background-color: #252525;
+    box-shadow: inset 0px 0px 10px black;
+    color: cornsilk;
+}
+.butaf{
+    background-color:white;
+    box-shadow: inset 0px 0px 10px black;
+    color:  #252525;
+}
+td{
+    cursor: pointer;
+}
+
